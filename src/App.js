@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Row, Col } from "antd";
+import { FormCom } from "./components/FormCom";
+import { ArticlePage } from "./components/ArticlePage";
+
+const colStyleProps = {
+  style: { background: "#7aa4b2", height: "100vh", overflow: "auto" },
+};
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Row>
+        <Col
+          span={12}
+          style={{
+            height: "100vh",
+            boxSizing: "border-box",
+            padding: "60px",
+            overflow: "auto",
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <FormCom />
+        </Col>
+        <Col span={12} {...colStyleProps}>
+          <ArticlePage />
+        </Col>
+      </Row>
     </div>
   );
 }
