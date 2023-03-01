@@ -15,8 +15,8 @@ const createTag = (articleId, tagName) => {
   return post(`/articles/${articleId}/tags?tag_name=${tagName}`);
 };
 
-const delTag = (articleId, tagId) => {
-  return deletes(`/articles/${articleId}/tags/${tagId}`);
+const delTag = (articleId, tagName) => {
+  return deletes(`/articles/${articleId}/tags?tag_name=${tagName}`);
 };
 
 export { loadArticles, loadArticleById, createTag, delTag };

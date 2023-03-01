@@ -82,7 +82,7 @@ function deletes(url, data) {
   return new Promise((resolve, reject) => {
     axios.delete(url, data).then(
       (res) => {
-        resolve(res.data);
+        resolve(res);
       },
       (error) => {
         reject(error);

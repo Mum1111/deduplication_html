@@ -3,8 +3,8 @@ import { message, Upload } from "antd";
 const { Dragger } = Upload;
 const props = {
   name: "file",
-  multiple: true,
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+  multiple: false,
+  action: "http://192.168.1.54:8081/v1/files/upload",
   onChange(info) {
     const { status } = info.file;
     if (status !== "uploading") {
