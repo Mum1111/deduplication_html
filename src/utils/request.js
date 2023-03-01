@@ -2,7 +2,7 @@ import axios from "axios";
 import NProgress from "nprogress";
 
 axios.defaults.timeout = 100000;
-axios.defaults.baseURL = "";
+axios.defaults.baseURL = "http://192.168.1.54:8081/v1";
 
 /**
  * http 请求拦截器
@@ -27,9 +27,10 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   (response) => {
-    if (response.data.errCode === 2) {
-      console.log("过期");
-    }
+    // if (response.data.errCode === 2) {
+    //   console.log("过期");
+    // }
+    console.log("response", response);
     NProgress.done();
     return response;
   },
@@ -67,7 +68,8 @@ function post(url, data) {
   return new Promise((reslove, reject) => {
     axios.post(url, data).then(
       (response) => {
-        reslove(response.data);
+        console.log("response", response);
+        reslove(response);
       },
       (error) => {
         reject(error);

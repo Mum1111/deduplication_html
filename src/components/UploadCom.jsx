@@ -27,9 +27,7 @@ export const UploadCom = () => {
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>
-      <p className="ant-upload-text">
-        Click or drag file to this area to upload
-      </p>
+      <p className="ant-upload-text">点击或拖拽文件到此区域上传</p>
       <p className="ant-upload-hint">
         Support for a single or bulk upload. Strictly prohibit from uploading
         company data or other band files

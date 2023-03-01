@@ -75,6 +75,7 @@ const mockData = {
 };
 
 export const ArticlePage = (props) => {
+  const { articleList } = props;
   const chooseDetail = (articleId) => {
     props.chooseDetail(articleId);
   };
@@ -93,51 +94,55 @@ export const ArticlePage = (props) => {
         className="content_container"
         style={{ height: "80vh", overflow: "auto" }}
       >
-        {mockData.pagination.list.map((item) => (
-          <div
-            key={item.id}
-            onClick={() => chooseDetail(item.id)}
-            style={{
-              backgroundColor: "#fff",
-              color: "#4d4d4d",
-              marginBottom: "10px",
-              boxSizing: "border-box",
-              borderRadius: "10px",
-              padding: "10px",
-              textAlign: "left",
-            }}
-          >
-            <div style={{ fontWeight: "bold", fontSize: "18px" }}>
-              {item.title}
-            </div>
-            <div style={{ fontSize: "14px", margin: "5px 0" }}>
-              {item.content}
-            </div>
-            <div className="tags">
-              {item.tags.map((it, index) => (
-                <Tag key={index}>{it}</Tag>
-              ))}
-            </div>
+        {articleList &&
+          articleList.list &&
+          articleList.list.map((item) => (
             <div
+              key={item.id}
+              onClick={() => chooseDetail(item.id)}
               style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: "5px",
+                backgroundColor: "#fff",
+                color: "#4d4d4d",
+                marginBottom: "10px",
+                boxSizing: "border-box",
+                borderRadius: "10px",
+                padding: "10px",
+                textAlign: "left",
               }}
             >
-              <div>
-                发布时间:
-                {dayjs(item.publish_time).format("YYYY-MM-DD HH:mm:ss")}
+              <div
+                style={{ fontWeight: "bold", fontSize: "18px" }}
+                dangerouslySetInnerHTML={{ __html: item.title }}
+              ></div>
+              <div
+                style={{ fontSize: "14px", margin: "5px 0" }}
+                dangerouslySetInnerHTML={{ __html: item.content }}
+              ></div>
+              <div className="tags">
+                {item.tags.map((it, index) => (
+                  <Tag key={index}>{it}</Tag>
+                ))}
               </div>
-              <div>字数:{item.text_num}</div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginTop: "5px",
+                }}
+              >
+                <div>
+                  发布时间:
+                  {dayjs(item.publish_time).format("YYYY-MM-DD HH:mm:ss")}
+                </div>
+                {item.text_num ? <div>字数:{item.text_num}</div> : ""}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
       <Pagination
         showSizeChanger={false}
         defaultCurrent={1}
-        total={mockData.pagination.total_size}
+        total={articleList.total_size}
       />
     </div>
   );

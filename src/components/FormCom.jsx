@@ -10,11 +10,12 @@ export const FormCom = (props) => {
   const [form] = Form.useForm();
 
   const calcType = (values) => {
-    if (values.keyWords !== "" && values.content !== "") {
+    console.log("values", values);
+    if (values.keyWords && values.content) {
       return 2;
-    } else if (values.keyWords === "" && values.content !== "") {
+    } else if (!values.keyWords && values.content) {
       return 1;
-    } else if (values.keyWords !== "" && values.content === "") {
+    } else if (values.keyWords && !values.content) {
       return 0;
     } else {
       return -1;
@@ -32,8 +33,15 @@ export const FormCom = (props) => {
       tags: values.keyWords.split(" "),
       content: values.content,
     };
-    await loadArticles(data);
-    console.log(values);
+    try {
+      const {
+        data: { pagination },
+      } = await loadArticles(data);
+      console.log(pagination);
+      props.onArticlePageList(pagination);
+    } catch (error) {
+      console.log(error);
+    }
   };
   const onValuesChange = (changeValues, allValue) => {
     if (changeValues.keyWords) {

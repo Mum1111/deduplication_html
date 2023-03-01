@@ -11,22 +11,11 @@ const colStyleProps = {
   style: { background: "#7aa4b2", height: "100vh", overflow: "auto" },
 };
 
-const tabsItems = [
-  {
-    key: "1",
-    label: `搜索`,
-    children: <FormCom />,
-  },
-  {
-    key: "2",
-    label: `上传素材`,
-    children: <UploadCom />,
-  },
-];
-
 function App() {
   const [open, setOpen] = useState(false);
   const [article, setArticle] = useState({});
+  const [articleList, setArticleList] = useState({});
+
   const loadArticleDetail = async (articleId) => {
     try {
       const res = await loadArticleById(articleId);
@@ -44,6 +33,23 @@ function App() {
   const changeOpen = (open) => {
     setOpen(open);
   };
+
+  const onArticlePageList = (pages) => {
+    setArticleList(pages);
+  };
+
+  const tabsItems = [
+    {
+      key: "1",
+      label: `搜索`,
+      children: <FormCom onArticlePageList={onArticlePageList} />,
+    },
+    {
+      key: "2",
+      label: `上传素材`,
+      children: <UploadCom />,
+    },
+  ];
   return (
     <div className="App">
       <Row>
@@ -59,7 +65,10 @@ function App() {
           <Tabs defaultActiveKey="1" centered items={tabsItems} />
         </Col>
         <Col span={12} {...colStyleProps}>
-          <ArticlePage chooseDetail={chooseArticleDetail} />
+          <ArticlePage
+            chooseDetail={chooseArticleDetail}
+            articleList={articleList}
+          />
         </Col>
       </Row>
       <ArticleDetail article={article} open={open} changeOpen={changeOpen} />
