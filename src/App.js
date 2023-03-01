@@ -1,14 +1,28 @@
 import "./App.css";
-import { Row, Col } from "antd";
+import { Row, Col, Tabs } from "antd";
 import { FormCom } from "./components/FormCom";
 import { ArticlePage } from "./components/ArticlePage";
 import { useState } from "react";
 import { ArticleDetail } from "./components/ArticleDetail";
 import { loadArticleById } from "./apis/article";
+import { UploadCom } from "./components/UploadCom";
 
 const colStyleProps = {
   style: { background: "#7aa4b2", height: "100vh", overflow: "auto" },
 };
+
+const tabsItems = [
+  {
+    key: "1",
+    label: `搜索`,
+    children: <FormCom />,
+  },
+  {
+    key: "2",
+    label: `上传素材`,
+    children: <UploadCom />,
+  },
+];
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -38,11 +52,11 @@ function App() {
           style={{
             height: "100vh",
             boxSizing: "border-box",
-            padding: "60px",
+            padding: "0 60px 60px",
             overflow: "auto",
           }}
         >
-          <FormCom />
+          <Tabs defaultActiveKey="1" centered items={tabsItems} />
         </Col>
         <Col span={12} {...colStyleProps}>
           <ArticlePage chooseDetail={chooseArticleDetail} />
