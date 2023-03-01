@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 
 const mockData = {
   pagination: {
-    total_size: 1000,
+    total_size: 100,
     current_page: 1,
     page_size: 20,
     list: [
@@ -74,11 +74,10 @@ const mockData = {
   },
 };
 
-const onShowSizeChange = (current, pageSize) => {
-  console.log(current, pageSize);
-};
-
 export const ArticlePage = (props) => {
+  const chooseDetail = (articleId) => {
+    props.chooseDetail(articleId);
+  };
   return (
     <div
       style={{
@@ -97,6 +96,7 @@ export const ArticlePage = (props) => {
         {mockData.pagination.list.map((item) => (
           <div
             key={item.id}
+            onClick={() => chooseDetail(item.id)}
             style={{
               backgroundColor: "#fff",
               color: "#4d4d4d",
@@ -136,9 +136,8 @@ export const ArticlePage = (props) => {
       </div>
       <Pagination
         showSizeChanger={false}
-        onShowSizeChange={onShowSizeChange}
         defaultCurrent={1}
-        total={500}
+        total={mockData.pagination.total_size}
       />
     </div>
   );

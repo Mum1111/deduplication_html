@@ -1,13 +1,24 @@
 import "./App.css";
-import { Row, Col } from "antd";
+import { Row, Col, Modal } from "antd";
 import { FormCom } from "./components/FormCom";
 import { ArticlePage } from "./components/ArticlePage";
+import { useState } from "react";
+import { ArticleDetail } from "./components/ArticleDetail";
 
 const colStyleProps = {
   style: { background: "#7aa4b2", height: "100vh", overflow: "auto" },
 };
 
 function App() {
+  const [open, setOpen] = useState(false);
+  const chooseArticleDetail = (articleId) => {
+    console.log(articleId);
+    setOpen(true);
+  };
+
+  const changeOpen = (open) => {
+    setOpen(open);
+  };
   return (
     <div className="App">
       <Row>
@@ -23,9 +34,10 @@ function App() {
           <FormCom />
         </Col>
         <Col span={12} {...colStyleProps}>
-          <ArticlePage />
+          <ArticlePage chooseDetail={chooseArticleDetail} />
         </Col>
       </Row>
+      <ArticleDetail open={open} changeOpen={changeOpen} />
     </div>
   );
 }
