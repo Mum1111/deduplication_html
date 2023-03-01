@@ -66,22 +66,10 @@ export const ArticleDetail = (props) => {
   const changeOpen = (open) => {
     props.changeOpen(open);
   };
-
-  const articleMock = {
-    id: "aaaaaaaaaaaaaaaa",
-    tags: ["a", "b", "c"],
-    title: "我是一个标题",
-    content:
-      ".....疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是疾病的治疗方案是....",
-    text_num: 3597,
-    publish_time: "2023-03-01T04:32:45.716Z",
-    create_time: "2023-03-01T04:32:45.716Z",
-    update_time: "2023-03-01T04:32:45.716Z",
-  };
   return (
     <>
       <Modal
-        title={articleMock.title}
+        title={article.title}
         centered
         open={props.open}
         onOk={() => changeOpen(false)}
@@ -93,7 +81,7 @@ export const ArticleDetail = (props) => {
         <>
           <Space size={[0, 8]} wrap>
             <Space size={[0, 8]} wrap>
-              {articleMock.tags.map((tag, index) => {
+              {article.tags.map((tag, index) => {
                 if (editInputIndex === index) {
                   return (
                     <Input
@@ -158,13 +146,13 @@ export const ArticleDetail = (props) => {
             )}
           </Space>
         </>
-        <div style={{ margin: "10px 0" }}>{articleMock.content}</div>
+        <div style={{ margin: "10px 0" }}>{article.content}</div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>
             发布时间:
-            {dayjs(articleMock.publish_time).format("YYYY-MM-DD HH:mm:ss")}
+            {dayjs(article.publish_time).format("YYYY-MM-DD HH:mm:ss")}
           </div>
-          <div>字数:{articleMock.text_num}</div>
+          {article.text_num ? <div>字数:{article.text_num}</div> : ""}
         </div>
       </Modal>
     </>

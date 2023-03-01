@@ -19,6 +19,7 @@ function App() {
   const loadArticleDetail = async (articleId) => {
     try {
       const res = await loadArticleById(articleId);
+      console.log("res", res);
       setArticle(res);
       setOpen(true);
     } catch (error) {
