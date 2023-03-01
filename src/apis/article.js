@@ -1,7 +1,7 @@
 import { post, get, deletes } from "../utils/request";
 
 const loadArticles = (data) => {
-  return get(
+  return post(
     `/articles?page_size=${data.pageSize}&current_page=${data.currentPage}`,
     data
   );
